@@ -18,5 +18,5 @@ une fois l'apprentissage terminé , vous pouvez lancer un test de reconnaissance
 
 pic_001.JPEG étant l'image d'un ballon de foot, vous devriez voir ceci comme résultat
 
-ballon foot (score = 0.99992) 
-ballon rugby (score = 0.00008)
+> ballon foot (score = 0.99992) 
+> ballon rugby (score = 0.00008)
