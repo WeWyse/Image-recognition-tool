@@ -1,6 +1,6 @@
 Welcome to the KSIA wiki!
 
-Vous trouverez ici un petit projet qui vous permettra de réaliser de la reconnaissance
+Vous trouverez ici un petit projet qui vous permettra de réaliser facilement de la reconnaissance
 d'image via le principe du "Transfert Learning"
 
 Lien vers une petit vidéo Youtube qui explique bien le principe:
@@ -17,12 +17,12 @@ Une fois que vous avez clone le projet , rendez-vous dans le répertoire
 
 **2 fichiers sont présents**
 
-**learn.sh**      --> lance un script python d'apprentissage basé sur le principe du "Transfer Lerning"
+**learn.sh**      --> lance un script python d'apprentissage basé sur le principe du "Transfert Learning"
 **recongnize.sh** --> lance un script python de reconnaissance.
 
-Le projet embarque 2 répertoires d'images qui permettent de tester le principe : ballon-foot , ballon-rugby
+Le projet embarque 2 répertoires d'images qui permettent de tester le principe : ballon-foot ( contient des images de ballon de foot) , ballon-rugby ( contient des images de ballon de rugby )
 
-Vous pouvez l'apprentissage comme suit : 
+Vous pouvez lancer l'apprentissage comme suit : 
 
 ./learn.sh ../src/fr.wewyse.iatoolbox/retrain.py ../src/resources/tf_files/images/learn ../src/resources/tf_files/bottlenecks 1000 ../src/resources/tf_files/inception ../src/resources/tf_files/retrained_files.pb ../src/resources/tf_files/retrained_labels.txt
 ***
