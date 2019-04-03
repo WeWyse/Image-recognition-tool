@@ -20,7 +20,9 @@ Une fois que vous avez clone le projet , rendez-vous dans le répertoire
 **learn.sh**      --> lance un script python d'apprentissage basé sur le principe du "Transfert Learning"
 **recognize.sh** --> lance un script python de reconnaissance.
 
-Le projet embarque 2 répertoires d'images qui permettent de tester le principe : ballon-foot ( contient des images de ballon de foot) , ballon-rugby ( contient des images de ballon de rugby )
+Le projet embarque 2 répertoires d'images qui permettent de tester le principe : 
+
+src/resources/tf_files/images/learn/ballon-foot ( contient des images de ballon de foot) src/resources/tf_files/images/learn/ballon-rugby ( contient des images de ballon de rugby )
 
 Vous pouvez lancer l'apprentissage comme suit : 
 
