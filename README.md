@@ -1,10 +1,13 @@
-/src
+/sh
 
 2 fichiers sont présents
 
-learn.sh --> lance un script python d'apprentissage basé sur le principe du "Transfert Learning" recognize.sh --> lance un script python de reconnaissance.
+learn.sh --> lance un script python d'apprentissage basé sur le principe du "Transfert Learning
+recognize.sh --> lance un script python de reconnaissance.
 
-Le projet embarque 2 répertoires d'images qui permettent de tester le principe : ballon-foot ( contient des images de ballon de foot) , ballon-rugby ( contient des images de ballon de rugby )
+Le projet embarque 2 répertoires d'images qui permettent de tester le principe :
+src/resources/tf_files/images/learn/ballon-foot ( contient des images de ballon de foot) 
+src/resources/tf_files/images/learn/ballon-rugby ( contient des images de ballon de rugby )
 
 Vous pouvez lancer l'apprentissage comme suit :
 
@@ -14,4 +17,5 @@ une fois l'apprentissage terminé , vous pouvez lancer un test de reconnaissance
 
 pic_001.JPEG étant l'image d'un ballon de foot, vous devriez voir ceci comme résultat
 
-ballon foot (score = 0.99992) ballon rugby (score = 0.00008)
+ballon foot (score = 0.99992) 
+ballon rugby (score = 0.00008)
