@@ -13,7 +13,7 @@ https://www.youtube.com/watch?v=QfNvhPx5Px8
 
 Une fois que vous avez clone le projet , rendez-vous dans le répertoire
 
-**/src**
+**/sh**
 
 **2 fichiers sont présents**
 
