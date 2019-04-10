@@ -20,4 +20,4 @@ Voici quelques lignes de commande si vous souhaitez executer via Docker ( le pr√
 
 <br> suivi de 
 
-<br>> ./recognize.sh ../src/fr.wewyse.iatoolbox/label.py ../src/resources/tf_files/images/recognize/pic_001.JPEG
+<br> > ./recognize.sh ../src/fr.wewyse.iatoolbox/label.py ../src/resources/tf_files/images/recognize/pic_001.JPEG
