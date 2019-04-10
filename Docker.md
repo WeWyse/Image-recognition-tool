@@ -1,7 +1,7 @@
 Voici quelques lignes de commande si vous souhaitez executer via Docker ( le pré-requis étant bien sur que vous ayez deja docker installé sur votre poste )
 
-<br>docker run -di --name ksia tensorflow/tensorflow:latest-devel 
-<br>docker exec -ti ksia sh
+> <br>docker run -di --name ksia tensorflow/tensorflow:latest-devel 
+> <br>docker exec -ti ksia sh
 
 <br>puis dans la console sh
 
