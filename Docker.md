@@ -19,6 +19,6 @@ Voici quelques lignes de commande si vous souhaitez executer via Docker ( le prÃ
 > ./learn.sh ../src/fr.wewyse.iatoolbox/retrain.py ../src/resources/tf_files/images/learn ../src/resources/tf_files/bottlenecks 1000 ../src/resources/tf_files/inception ../src/resources/tf_files/retrained_files.pb ../src/resources/tf_files/retrained_labels.txt
 
 <br> suivi de 
-
 <br> 
 > ./recognize.sh ../src/fr.wewyse.iatoolbox/label.py ../src/resources/tf_files/images/recognize/pic_001.JPEG
+<br>
