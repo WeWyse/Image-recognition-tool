@@ -1,22 +1,20 @@
 Voici quelques lignes de commande si vous souhaitez executer via Docker ( le pré-requis étant bien sur que vous ayez deja docker installé sur votre poste )
 
-docker run -di --name ksia tensorflow/tensorflow:latest-devel 
-docker exec -ti ksia sh
-***
+<br>docker run -di --name ksia tensorflow/tensorflow:latest-devel 
+<br>docker exec -ti ksia sh
 
+<br>puis dans la console sh
 
-puis dans la console sh
+<br>apt-get update
+<br>apt-get install vim
+<br>apt-get install python3-pip
+<br>/usr/bin/python3.5 -m pip install tensorflow
+<br>mkdir logiciel
+<br>cd logiciel
+<br>git clone https://github.com/WeWyse/KSIA.git
+<br>cd KSIA
+<br>cd sh
 
-apt-get update
-apt-get install vim
-apt-get install python3-pip
-/usr/bin/python3.5 -m pip install tensorflow
-mkdir logiciel
-cd logiciel
-git clone https://github.com/WeWyse/KSIA.git
-cd KSIA
-cd sh
+<br>puis lancer la commande suivante
 
-puis lancer la commande suivante
-
-./recognize.sh ../src/fr.wewyse.iatoolbox/label.py ../src/resources/tf_files/images/recognize/pic_001.JPEG
+<br>./recognize.sh ../src/fr.wewyse.iatoolbox/label.py ../src/resources/tf_files/images/recognize/pic_001.JPEG
