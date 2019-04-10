@@ -15,7 +15,7 @@ Voici quelques lignes de commande si vous souhaitez executer via Docker ( le prÃ
 > <br>cd KSIA
 > <br>cd sh
 
-<br>puis lancer la commandes suivante
+<br>puis lancer la commande suivante
 > ./learn.sh ../src/fr.wewyse.iatoolbox/retrain.py ../src/resources/tf_files/images/learn ../src/resources/tf_files/bottlenecks 1000 ../src/resources/tf_files/inception ../src/resources/tf_files/retrained_files.pb ../src/resources/tf_files/retrained_labels.txt
 
 <br> suivi de 
