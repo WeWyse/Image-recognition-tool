@@ -7,6 +7,12 @@ RUN apt-get update \
 
 RUN npm install express
 
+RUN npm install formidable@latest
+
+RUN npm install path
+
+RUN npm install fs-extra
+
 RUN mkdir -p /usr/src/app
 
 COPY index.js /usr/src/app
