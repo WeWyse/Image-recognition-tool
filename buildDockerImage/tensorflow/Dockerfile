@@ -16,4 +16,7 @@ WORKDIR /root/logiciel
 
 RUN git clone https://github.com/WeWyse/KSIA.git 
 
+COPY launch.sh /root/logiciel/KSIA/sh
+
 WORKDIR /root/logiciel/KSIA/sh
+
