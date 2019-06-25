@@ -23,6 +23,8 @@ RUN npm install socket.io
 
 RUN npm install http
 
+RUN npm install tail
+
 RUN mkdir -p /usr/src/app
 
 RUN mkdir -p /usr/src/app/views
