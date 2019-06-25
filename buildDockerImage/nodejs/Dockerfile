@@ -19,6 +19,10 @@ RUN npm install ejs
 
 RUN npm install shelljs
 
+RUN npm install socket.io
+
+RUN npm install http
+
 RUN mkdir -p /usr/src/app
 
 RUN mkdir -p /usr/src/app/views
@@ -39,8 +43,8 @@ RUN ln -s /Users/docker/www/ksia/images/learn learn
 
 RUN ln -s /Users/docker/www/ksia/images/recognize recognize
 
-WORKDIR /usr/src/app
-
 EXPOSE 8080
 
 RUN useradd docker
+
+WORKDIR /usr/src/app
