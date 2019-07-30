@@ -18,5 +18,15 @@ RUN git clone https://github.com/WeWyse/KSIA.git
 
 COPY launch.sh /root/logiciel/KSIA/sh
 
+RUN rm -rf /root/logiciel/KSIA/.idea
+
+RUN rm -rf /root/logiciel/KSIA/buildDockerImage
+
+RUN rm -rf /root/logiciel/KSIA/Docker.md
+
+RUN rm -rf /root/logiciel/KSIA/Home.md
+
+RUN rm -rf /root/logiciel/KSIA/README.md
+
 WORKDIR /root/logiciel/KSIA/sh
 
