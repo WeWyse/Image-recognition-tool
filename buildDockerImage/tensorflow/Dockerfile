@@ -8,7 +8,7 @@ RUN apt-get update \
 && apt-get -y install cron \
 && apt-get -y install grep
 
-RUN /usr/bin/python3.5 -m pip install tensorflow 
+RUN /usr/bin/python3.6 -m pip install tensorflow 
 
 RUN mkdir -p /root/logiciel 
 
