@@ -1,3 +1,5 @@
+# Projet
+
 **IRTT**: **I**mage **R**ecognition **T**raining **T**ool
 
 # Principe du projet : 
@@ -12,11 +14,13 @@ docker (et docker-machine) installés sur votre environnement
 * https://docs.docker.com/
 * https://docs.docker.com/docker-for-mac/
 * https://docs.docker.com/docker-for-windows/
+* https://chrome.google.com/webstore/detail/fatkun-batch-download-ima/nnjjahlikiabnchcpehcpkdeckfgnohf?hl=en
+( je vous conseille chrome avec cette extension pour récupérer des images facilement et avec une bonne nomenclature )
 
 Dans suite du tuto, je pars du principe que le git clone s'est fait dans le path /Users/docker
 (à vous d'adapter si vous optez pour un autre path).
 
-Noter aussi que c'est une béta et que le process n'est pas encore optimal.
+Notez aussi que c'est une béta et que le process n'est pas encore optimal.
 
 # Les étapes : 
 
@@ -31,14 +35,10 @@ Noter aussi que c'est une béta et que le process n'est pas encore optimal.
 
 ### List environnement docker
 > docker-machine ls
+--> vous donnera entre autre l'ip à utiliser pour accéder au service
 
 ### Start environnement docker
 > docker-machine start irtt-docker
-
-### Infos environnement docker
-> docker-machine ls
---> vous donnera entre autre l'ip à utiliser pour accéder au service
-
 
 ### Set env
 > eval $(docker-machine env irtt-docker)
@@ -65,10 +65,12 @@ ex : docker run -di --name tensor-service -v /Users/docker:/Users/docker 5091ada
 ### sh container nodejs
 > docker exec -ti nodejs-service sh
 
-à ce stade, vous êtes dans le container du service nodejsn, dans le répertoire /usr/src/app
+à ce stade, vous êtes dans le container du service nodejs, dans le répertoire /usr/src/app
 
 ### Vous pouvez lancer le service nodejs comme suit : 
 > nohup node index &
+
+Vous devez accédez à une interface web : http://ip-local:8081 
 
 ### sh container tensorflow
 > docker exec -ti tensor-service sh
