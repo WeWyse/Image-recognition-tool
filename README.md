@@ -37,6 +37,9 @@ Notez aussi que c'est une béta et que le process n'est pas encore optimal.
 > docker-machine ls
 --> vous donnera entre autre l'ip à utiliser pour accéder au service
 
+### Création environnement irtt-docker
+> docker-machine create irtt-docker
+
 ### Start environnement docker
 > docker-machine start irtt-docker
 
