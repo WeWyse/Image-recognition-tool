@@ -1,5 +1,4 @@
-o ballon rugby (score = 0.00008)
-RTT**: **I**mage **R**ecognition **T**raining **T**ool
+**IRTT**: **I**mage **R**ecognition **T**raining **T**ool
 
 # Principe du projet : 
 
