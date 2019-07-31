@@ -70,7 +70,7 @@ ex : docker run -di --name tensor-service -v /Users/docker:/Users/docker 5091ada
 ### Vous pouvez lancer le service nodejs comme suit : 
 > nohup node index &
 
-Vous devez accédez à une interface web : http://ip-local:8081 
+Vous devez accédr à une interface web : http://ip-local:8081 
 
 ### sh container tensorflow
 > docker exec -ti tensor-service sh
