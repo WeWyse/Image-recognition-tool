@@ -1,0 +1,6 @@
+# contents of properties file
+[main]
+some.thing = foo
+ip = 192.168.99.112
+port = 8081
+shared.volume = /Users/docker/

@@ -6,9 +6,13 @@ var shell = require('shelljs')
 var util = require('util');
 var path = require("path");
 
-var fileRecoToTail = "/Users/docker/log_reco.txt";
-var fileLearnToTail = "/Users/docker/log_learn.txt";
-var fileWatchToTail = "/Users/docker/log_watch.txt";
+var PropertiesReader = require('properties-reader');
+var properties = PropertiesReader('/usr/src/app/properties.file');
+
+var fileRecoToTail = ""+properties.get('main.shared.volume')+"log_reco.txt";
+var fileLearnToTail = ""+properties.get('main.shared.volume')+"log_learn.txt";
+var fileWatchToTail = ""+properties.get('main.shared.volume')+"log_watch.txt";
+
 var Tail = require('tail').Tail;
 var options= {separator: /[\r]{0,1}\n/, fromBeginning: true, fsWatchOptions: {}, follow: true, logger: console}
 var tailReco = new Tail(fileRecoToTail,options);
@@ -22,7 +26,8 @@ var clientsSocket = new Array();
 
 app.use('/static', express.static(__dirname + '/img'));
 
-function mkDirCpFiles (f,page,fields,files) {
+
+function mkDirCpFiles (f,page) {
    var listImg = []; 
    for(var i = 0; i < f.openedFiles.length; i++) {
       if ( i == 0) {
@@ -82,6 +87,7 @@ app.post('/learn', function(req, res) {
 
    form.parse(req);
    
+	
    form.on('fileBegin', function (name, file){
       file.path = __dirname + '/img/tempo/' + file.name;
       console.log('form fileBegin '+util.inspect({name: name, file: file}));
@@ -93,7 +99,7 @@ app.post('/learn', function(req, res) {
  
    form.on('end', function (fields, files) {
       console.log('end ' + form.openedFiles.length);
-      var imgToDisplay = mkDirCpFiles (form,'learn',fields,files);
+      var imgToDisplay = mkDirCpFiles (form,'learn');
       res.render('learn.ejs', {page:'learn', valeur: imgToDisplay});
    });
 });
@@ -101,9 +107,18 @@ app.post('/learn', function(req, res) {
 
 app.post('/recognize', function(req, res) {
    var form = new formidable.IncomingForm();
-
-   form.parse(req);
-
+   var fields = {}; 
+   //form.parse(req);
+   form.parse(req, function(err, fields, files) {
+   //	console.log('parse '+util.inspect({fields:fields}));
+        console.log('parse '+fields.imgToDisplay);
+   });
+   
+   form.on('field', function(name, value) {
+      console.log('field recu '+util.inspect({name: name, value: value}));
+      if (name == 'imgToDisplay') { fields[name] = value; }
+   });
+	
    form.on('fileBegin', function (name, file){
       file.path = __dirname + '/img/tempo/' + file.name;
       console.log('form fileBegin '+util.inspect({name: name, file: file}));
@@ -113,10 +128,15 @@ app.post('/recognize', function(req, res) {
       console.log('form file '+util.inspect({name: name, file: file}));
    });
 
-   form.on('end', function (fields, files) {
-      console.log('end ' + form.openedFiles.length);
-      var imgToDisplay= mkDirCpFiles (form,'recognize',fields,files);
-      res.render('recognize.ejs', {page:'recognize', valeur: imgToDisplay});
+   form.on('end', function () {
+      if(fields['imgToDisplay']){
+      	console.log('fields '+fields['imgToDisplay']);
+        res.render('recognize.ejs', {page:'recognize', valeur: fields['imgToDisplay'],ip: properties.get('main.ip'), port: properties.get('main.port')});
+      } else {
+	console.log('properties '+properties.get('main.some.thing'));
+	var imgToDisplay= mkDirCpFiles (form,'recognize');
+      	res.render('recognize.ejs', {page:'recognize', valeur: imgToDisplay, ip: properties.get('main.ip'), port: properties.get('main.port')});
+      }
    });
 
 });
