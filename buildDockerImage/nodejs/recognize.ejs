@@ -31,7 +31,7 @@
 	<script src=".\node_modules\socket.io\node_modules\socket.io-client/socket.io.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script>
-        var socket = io.connect('http://192.168.99.104:8081');
+        var socket = io.connect('http://192.168.99.112:8081');
 	// Reception message du serveur
 	socket.on('message', function (reception) {
 	var wrapper = document.getElementById('wrapper');
@@ -68,10 +68,12 @@
 			<div class="col-md-4">
 				<div class="jumbotron">RECOGNIZE 
 				<p>
-				<form action="/recognizeresult" enctype="multipart/form-data" method="post">
+				<form name="formName" action="/recognize" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="startreco" value="startreco"><br>
+					<input type="hidden" name="imgToDisplay" value="<%= valeur %>"><br>
+					<input type="hidden" name="page" value="<%= page %>"><br>
 					<br>
-					<input type="submit" value="Start Recognization">
+					<input type="submit" value="Start recognition">
 				</form>
 				</p>
 				</div>	

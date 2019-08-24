@@ -5,7 +5,8 @@ RUN apt-get update \
 && apt-get -y install vim \
 && apt-get -y install curl \
 && apt-get -y install cron \
-&& apt-get -y install grep
+&& apt-get -y install grep \
+&& apt-get -y install mongodb-server 
 
 RUN npm install express
 
@@ -24,6 +25,8 @@ RUN npm install socket.io
 RUN npm install http
 
 RUN npm install tail
+
+RUN npm install properties-reader
 
 RUN mkdir -p /usr/src/app
 
