@@ -36,6 +36,8 @@ RUN mkdir -p /usr/src/app/img/tempo
 
 COPY index.js /usr/src/app
 
+COPY properties.file /usr/src/app 
+
 COPY index.ejs /usr/src/app/views
 
 COPY recognize.ejs /usr/src/app/views

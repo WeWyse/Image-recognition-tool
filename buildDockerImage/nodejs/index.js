@@ -131,7 +131,8 @@ app.post('/recognize', function(req, res) {
    form.on('end', function () {
       if(fields['imgToDisplay']){
       	console.log('fields '+fields['imgToDisplay']);
-        res.render('recognize.ejs', {page:'recognize', valeur: fields['imgToDisplay'],ip: properties.get('main.ip'), port: properties.get('main.port')});
+        shell.exec('/Users/docker/launch2.sh');
+	res.render('recognize.ejs', {page:'recognize', valeur: fields['imgToDisplay'],ip: properties.get('main.ip'), port: properties.get('main.port')});
       } else {
 	console.log('properties '+properties.get('main.some.thing'));
 	var imgToDisplay= mkDirCpFiles (form,'recognize');
