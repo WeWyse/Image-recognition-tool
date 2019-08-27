@@ -56,16 +56,16 @@ Notez aussi que c'est une béta et que le process n'est pas encore optimal.
 > docker-machine regenerate-certs irtt-docker
 
 ### Start container nodejs
-> docker run -di --name nodejs-service -v /Users/docker:/Users/docker -d -p 8081:8080 id-image-container-nodejs
+> docker run -di --name nodejs-service -v /Users/docker:/Users/docker -d -p 8081:8080 -p 8022:22 id-image-container-nodejs
 
-ex : docker run -di --name nodejs-service -v /Users/docker:/Users/docker -d -p 8081:8080 e068202eb067
+ex : docker run -di --name nodejs-service -v /Users/docker:/Users/docker -d -p 8081:8080 -p 8022:22 e068202eb067
 
 ### Start container tensorflow
-> docker run -di --name tensor-service -v /Users/docker:/Users/docker id-image-container-tensorflow
+> docker run -di --name tensor-service -v /Users/docker:/Users/docker -d -p 2222:22 id-image-container-tensorflow
 
-ex : docker run -di --name tensor-service -v /Users/docker:/Users/docker 5091ada4e39a
+ex : docker run -di --name tensor-service -v /Users/docker:/Users/docker -d -p 2222:22 5091ada4e39a 
 
-### sh container nodejs
+## sh container nodejs
 > docker exec -ti nodejs-service sh
 
 à ce stade, vous êtes dans le container du service nodejs, dans le répertoire /usr/src/app
