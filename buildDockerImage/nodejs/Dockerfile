@@ -6,7 +6,8 @@ RUN apt-get update \
 && apt-get -y install curl \
 && apt-get -y install cron \
 && apt-get -y install grep \
-&& apt-get -y install mongodb-server 
+&& apt-get -y install mongodb-server \ 
+&& apt-get -y install openssh-server
 
 RUN npm install express
 
@@ -51,6 +52,12 @@ RUN ln -s /Users/docker/www/ksia/images/learn learn
 RUN ln -s /Users/docker/www/ksia/images/recognize recognize
 
 EXPOSE 8080
+
+RUN mkdir /var/run/sshd
+
+RUN echo 'root:password' | chpasswd
+
+EXPOSE 22
 
 RUN useradd docker
 
