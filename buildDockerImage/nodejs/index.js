@@ -131,7 +131,13 @@ app.post('/recognize', function(req, res) {
    form.on('end', function () {
       if(fields['imgToDisplay']){
       	console.log('fields '+fields['imgToDisplay']);
-        shell.exec('/Users/docker/launch2.sh');
+        
+	shell.exec('ssh root@172.17.0.2 "cd /root/logiciel/KSIA/sh/;/root/logiciel/KSIA/sh/launch.sh"',function(code, stdout, stderr) {
+		  console.log('Exit code:', code);
+		  console.log('Program output:', stdout);
+		  console.log('Program stderr:', stderr);
+	});
+
 	res.render('recognize.ejs', {page:'recognize', valeur: fields['imgToDisplay'],ip: properties.get('main.ip'), port: properties.get('main.port')});
       } else {
 	console.log('properties '+properties.get('main.some.thing'));
