@@ -75,24 +75,28 @@ il faut la première fois :
 mettre à jour le fichier /usr/src/app/properties.files
 
 > [main]
-> some.thing = foo
-> ip = < mettre ici l'ip local du container nodejs ( celle accessible via browser web ) >
-> port = 8081
-> shared.volume = /Users/docker/
+> some.thing = foo<br>
+> ip = < mettre ici l'ip local du container nodejs ( celle accessible via browser web ) ><br>
+> port = 8081<br>
+> shared.volume = /Users/docker/<br>
 
 > [tensor]
-> ip = < mettre ici l'ip priv?e du container , souvent en 172.17.0.xx )
+> ip = < mettre ici l'ip priv?e du container , souvent en 172.17.0.xx )<br>
+
+> commande pour recupérer l'ip : docker inspect id-du-container-tensorflow | grep -i IPAddress
+  
+ex: docker inspect b035760bdffc | grep -i IPAddress
 
 mettre en place le ssh-less entre le container nodejs et le container tensorflow
 
-> faire un ssh-keygen
-> et copier le contenu de /root/.ssh/id_rsa.pub
-> dans /root/.ssh/authorized_keys du container tensorflow ( vous y accédez comme suit :docker exec -ti tensor-service sh )
+> faire un ssh-keygen<br>
+> et copier le contenu de /root/.ssh/id_rsa.pub<br>
+> dans /root/.ssh/authorized_keys du container tensorflow ( vous y accédez comme suit :docker exec -ti tensor-service sh )<br>
 
 ### Vous pouvez lancer le service nodejs comme suit : 
 > nohup node index &
 
 Vous devez accédez à une interface web : http://ip-local:8081 
 
-### sh container tensorflow
+### sh container tensorflow ( si besoin je redonne la commande )
 > docker exec -ti tensor-service sh
