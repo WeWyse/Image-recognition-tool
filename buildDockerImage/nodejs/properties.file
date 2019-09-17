@@ -4,3 +4,6 @@ some.thing = foo
 ip = 192.168.99.112
 port = 8081
 shared.volume = /Users/docker/
+
+[tensor]
+ip = 172.17.0.2
