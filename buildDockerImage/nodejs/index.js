@@ -132,10 +132,10 @@ app.post('/recognize', function(req, res) {
       if(fields['imgToDisplay']){
       	console.log('fields '+fields['imgToDisplay']);
         
-	shell.exec('ssh root@172.17.0.2 "cd /root/logiciel/KSIA/sh/;/root/logiciel/KSIA/sh/launch.sh"',function(code, stdout, stderr) {
+	shell.exec('ssh root@'+properties.get('tensor.ip')+' "cd /root/logiciel/KSIA/sh/;/root/logiciel/KSIA/sh/launch.sh"',function(code, stdout, stderr) {
 		  console.log('Exit code:', code);
-		  console.log('Program output:', stdout);
-		  console.log('Program stderr:', stderr);
+		  //console.log('Program output:', stdout);
+		  //console.log('Program stderr:', stderr);
 	});
 
 	res.render('recognize.ejs', {page:'recognize', valeur: fields['imgToDisplay'],ip: properties.get('main.ip'), port: properties.get('main.port')});
@@ -153,24 +153,21 @@ app.use(function(req, res, next){
    res.status(404).send('Page introuvable !');
 });
 
-// A chaque client connecté on attibut son propre scope
 io.sockets.on('connection', function (socket) {
-//Ajout du nouveau client ?|  la liste des clients
         clientsSocket = socket;
 
-        //Un client vient de se connecter
-        console.log("Un client vient de se connecter! IP: " + socket.handshake.address);
+        //console.log("Un client vient de se connecter! IP: " + socket.handshake.address);
 
         tailReco.on("line", function(data) {
         //console.log(data);
         // Envoi message de bienvenue au client
                 socket.emit('message', {
                 'from' : 'Serveur',
-                'message' : 'RECO ---> '+data
+                'message' : data
                 });
-                setTimeout(function () {
-                                    console.log('timeout completed tailReco');
-                }, 1000);
+                /*setTimeout(function () {
+                                    //console.log('timeout completed tailReco');
+                }, 1000);*/
 
         });
 
@@ -180,11 +177,11 @@ io.sockets.on('connection', function (socket) {
         //Envoi message de bienvenue au client
                 socket.emit('message', {
                 'from' : 'Serveur',
-                'message' : 'LEARN ---> '+data
+                'message' : data
                 });
-                setTimeout(function () {
-                                    console.log('timeout completed tailLearn');
-                }, 1000);
+                /*setTimeout(function () {
+                                    //console.log('timeout completed tailLearn');
+                }, 1000);*/
         });
 
         tailWatch.on("line", function(data) {
@@ -192,17 +189,18 @@ io.sockets.on('connection', function (socket) {
          //Envoi message de bienvenue au client
                 socket.emit('message', {
                 'from' : 'Serveur',
-                'message' : '---> '+data
+                'message' : data
                 });
-                setTimeout(function () {
-                                    console.log('timeout completed tailWatch');
-                }, 1000);
+                /*setTimeout(function () {
+                                    //console.log('timeout completed tailWatch');
+                }, 1000);*/
         });
 
         // Reception message d'un client qui est renvoyé ?|  tous les clients
         socket.on('message', function(reception) {
-                console.log("Message de " + reception.from + ": " + reception.message);
-                for(key in io.sockets.sockets){
+                //console.log("Message de " + reception.from + ": " + reception.message);
+                console.log(reception.message);
+		for(key in io.sockets.sockets){
                         io.sockets.sockets[key].emit('message', reception);
                 }
         });

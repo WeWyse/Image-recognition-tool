@@ -31,12 +31,15 @@
 	<script src=".\node_modules\socket.io\node_modules\socket.io-client/socket.io.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script>
-        var socket = io.connect('http://192.168.99.112:8081');
+	var socket = io.connect('http://192.168.99.112:8081');
 	// Reception message du serveur
 	socket.on('message', function (reception) {
 	var wrapper = document.getElementById('wrapper');
+	var loader = document.getElementById('loader');
+	loader.style.display = "none";
+	
 	var p = document.createElement('p');
-	var textNode = document.createTextNode("Message de " + reception.from + ": " + reception.message);
+	var textNode = document.createTextNode(reception.message);
 	p.appendChild(textNode);
 	wrapper.appendChild(p);
 	}); 
@@ -55,7 +58,8 @@
         </script>
 	<body>
 	<div class="container">
-		<h1>IRTT : Image Recognition Training Tool : <%= page %><%= valeur %><%= ip %><%= port %> </h1>
+		<h1>Image Recognition Training Tool </h1>
+		<!--<h1>IRTT : Image Recognition Training Tool : <%= page %><%= valeur %><%= ip %><%= port %> </h1>-->
 		<div>
 		<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
 			<ul class="nav navbar-nav">
@@ -95,9 +99,9 @@
 				<img class="visuel" src="/static/tempo/<%= page %><%= valeur %>">
 			</div>
 			<div class="col-md-4">
-			        <div class="jumbotron">CONSOLE
+			        <div class="jumbotron">
                                 <p>
-					<div id="wrapper"></div>
+				<div id="wrapper"><div id="loader"><img class="visuel" src="/static/tempo/wait.gif"></div></div>
 				</div>
 			</div>
 		</div>

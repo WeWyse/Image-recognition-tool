@@ -45,6 +45,8 @@ COPY recognize.ejs /usr/src/app/views
 
 COPY learn.ejs /usr/src/app/views
 
+COPY wait.gif /usr/src/app/img/tempo
+
 WORKDIR /usr/src/app/img/tempo
 
 RUN ln -s /Users/docker/www/ksia/images/learn learn
