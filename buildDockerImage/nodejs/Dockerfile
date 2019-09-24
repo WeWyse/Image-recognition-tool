@@ -49,6 +49,8 @@ COPY wait.gif /usr/src/app/img/tempo
 
 WORKDIR /usr/src/app/img/tempo
 
+ADD learn /Users/docker/www/ksia/images/learn
+
 RUN ln -s /Users/docker/www/ksia/images/learn learn
 
 RUN ln -s /Users/docker/www/ksia/images/recognize recognize
@@ -64,3 +66,5 @@ EXPOSE 22
 RUN useradd docker
 
 WORKDIR /usr/src/app
+
+RUN nohup node index &

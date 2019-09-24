@@ -1,0 +1,9 @@
+albator
+batman
+black_panther
+captain
+cobra
+darkvador
+hulk
+spiderman
+thor
