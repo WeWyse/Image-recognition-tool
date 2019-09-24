@@ -96,7 +96,25 @@ mettre en place le ssh-less entre le container nodejs et le container tensorflow
 ### Vous pouvez lancer le service nodejs comme suit : 
 > nohup node index &
 
-Vous devez accédez à une interface web : http://ip-local:8081 
+sortir du container nodejs puis : 
 
-### sh container tensorflow ( si besoin je redonne la commande )
+### sh container tensorflow 
 > docker exec -ti tensor-service sh
+
+### Lancement du service ssh container dans le container tensorflow
+> /etc/init.d/ssh start
+
+Vous devez accéder à une interface web : http://ip-local:8081 et pouvez commencer à l'utiliser.
+
+pour info : le projet a été entrainé avec des images de :
+
+> Dark Vador<br>
+> Batman <br>
+> Spiderman <br>
+> Thor <br>
+> Albator <br>
+> Black panther <br> 
+> Cobra <br>
+> Hulk <br>
+> Captain America <br> 
+
