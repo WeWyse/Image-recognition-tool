@@ -37,17 +37,6 @@
 	wrapper.appendChild(p);
 	}); 
         
-	// Envoi message au serveur
-        $("#formulaire").click(function() {
-	var pseudo = $("#pseudo").val();
-	var message = $("#message").val();
-	var envoi = {
-	'from' : pseudo,
-	'message' : message
-	}
-	socket.emit('message', envoi);
-	});
-     
         </script>
 	<body>
 	<div class="container">

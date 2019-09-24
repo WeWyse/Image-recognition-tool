@@ -28,34 +28,37 @@
 		}
 		</style>
 	</head>
+	<script>
+	function showVisual() {
+		document.getElementById('visual').style.visibility='visible';
+		document.getElementById('learn').style.display='hidden';
+	}
+	</script>
 	<script src=".\node_modules\socket.io\node_modules\socket.io-client/socket.io.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script>
-        var socket = io.connect('http://192.168.99.112:8081');
-	// Reception message du serveur
+//function showVisual() {
+//document.getElementById('visual').style.display='block';	
+//setTimeout(function(){
+	//var socket = io.connect('http://192.168.99.112:8081');
+        var socket = io.connect('http://<%= ip %>:<%= port %>');
+
 	socket.on('message', function (reception) {
 	var wrapper = document.getElementById('wrapper');
+	var loader = document.getElementById('loader');	
+	loader.style.display = "none"; 
 	var p = document.createElement('p');
-	var textNode = document.createTextNode("Message de " + reception.from + ": " + reception.message);
+	var textNode = document.createTextNode(reception.message);
 	p.appendChild(textNode);
 	wrapper.appendChild(p);
 	}); 
-        
-	// Envoi message au serveur
-        $("#formulaire").click(function() {
-	var pseudo = $("#pseudo").val();
-	var message = $("#message").val();
-	var envoi = {
-	'from' : pseudo,
-	'message' : message
-	}
-	socket.emit('message', envoi);
-	});
-     
-        </script>
+//}, 3000);
+//}
+	</script>
 	<body>
 	<div class="container">
-		<h1>IRTT : Image Recognition Training Tool : <%= page %><%= valeur %> </h1>
+		<h1>Image Recognition Training Tool </h1>
+		<!--<h1>IRTT : Image Recognition Training Tool : <%= page %><%= valeur %><%= ip %><%= port %> </h1>-->
 		<div>
 		<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
 			<ul class="nav navbar-nav">
@@ -66,12 +69,15 @@
 		</nav>	
 		<div class="row">
 			<div class="col-md-4">
-				<div class="jumbotron">LEARN 
+				<div class="jumbotron" id="learn">LEARN 
 				<p>
-				<form action="/learnresult" enctype="multipart/form-data" method="post">
-					<input type="hidden" name="startreco" value="startlearn"><br>
+				<form name="formName" action="/learn" enctype="multipart/form-data" method="post" onsubmit="showVisual()">
+					<input type="hidden" name="startlearn" value="startlearn"><br>
+					<input type="hidden" name="imgToDisplay" value="<%= valeur %>"><br>
+					<input type="hidden" name="page" value="<%= page %>"><br>
 					<br>
-					<input type="submit" value="Start Learning">
+					<input type="submit" value="Start learn" id="smit">
+					<!--<button onclick="showVisual()">Modifier</button>-->
 				</form>
 				</p>
 				</div>	
@@ -93,9 +99,9 @@
 				<img class="visuel" src="/static/tempo/<%= page %><%= valeur %>">
 			</div>
 			<div class="col-md-4">
-			        <div class="jumbotron">CONSOLE
-                                <p>
-					<div id="wrapper"></div>
+				<div class="jumbotron">
+				<p>
+				<div id="wrapper"><div id="loader"><img class="visuel" src="/static/tempo/wait.gif" style="visibility:hidden;" id="visual"></div></div>
 				</div>
 			</div>
 		</div>

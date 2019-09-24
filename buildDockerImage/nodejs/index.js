@@ -84,9 +84,16 @@ app.get('/', function(req, res) {
 
 app.post('/learn', function(req, res) {
    var form = new formidable.IncomingForm();
-
-   form.parse(req);
-   
+   var fields = {};
+   //form.parse(req);
+   form.parse(req, function(err, fields, files) {
+	   console.log('parse '+fields.imgToDisplay);
+   });
+	
+   form.on('field', function(name, value) {
+	console.log('field recu '+util.inspect({name: name, value: value}));
+	if (name == 'imgToDisplay') { fields[name] = value;}
+   });
 	
    form.on('fileBegin', function (name, file){
       file.path = __dirname + '/img/tempo/' + file.name;
@@ -97,10 +104,19 @@ app.post('/learn', function(req, res) {
       console.log('form file '+util.inspect({name: name, file: file}));   
    });
  
-   form.on('end', function (fields, files) {
-      console.log('end ' + form.openedFiles.length);
-      var imgToDisplay = mkDirCpFiles (form,'learn');
-      res.render('learn.ejs', {page:'learn', valeur: imgToDisplay});
+   form.on('end', function () {
+      
+      if(fields['imgToDisplay']){
+        console.log('fields '+fields['imgToDisplay']);
+	shell.exec('ssh root@'+properties.get('tensor.ip')+' "cd /root/logiciel/KSIA/sh/;/root/logiciel/KSIA/sh/launch.sh"',function(code, stdout, stderr) {
+	console.log('Exit code:', code);
+	});
+	res.render('learn.ejs', {page:'learn', valeur: fields['imgToDisplay'],ip: properties.get('main.ip'), port: properties.get('main.port')});
+      } else {
+      	console.log('end ' + form.openedFiles.length);
+        var imgToDisplay = mkDirCpFiles (form,'learn');
+        res.render('learn.ejs', {page:'learn', valeur: imgToDisplay, ip: properties.get('main.ip'), port: properties.get('main.port')});
+      }
    });
 });
 
@@ -145,7 +161,6 @@ app.post('/recognize', function(req, res) {
       	res.render('recognize.ejs', {page:'recognize', valeur: imgToDisplay, ip: properties.get('main.ip'), port: properties.get('main.port')});
       }
    });
-
 });
 
 app.use(function(req, res, next){
