@@ -29,10 +29,10 @@
 		</style>
 	</head>
 	<script>
-	function showVisual() {
-		document.getElementById('visual').style.visibility='visible';
-		document.getElementById('recognize').style.display='hidden';
-	}
+	//function showVisual() {
+	//	document.getElementById('visual').style.visibility='visible';
+	//	document.getElementById('recognize').style.display='hidden';
+	//}
 	</script>
 	<script src=".\node_modules\socket.io\node_modules\socket.io-client/socket.io.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -102,6 +102,12 @@
 				<div class="jumbotron">
 				<p>
 				<div id="wrapper"><div id="loader"><img class="visuel" src="/static/tempo/wait.gif" style="visibility:hidden;" id="visual"></div></div>
+				<script>
+				 function showVisual() {
+					document.getElementById('visual').style.visibility='visible';
+					document.getElementById('recognize').style.display='hidden';
+				}
+				</script>
 				</div>
 			</div>
 		</div>

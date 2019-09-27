@@ -13,7 +13,7 @@ RUN mkdir /var/run/sshd
 
 RUN echo 'root:password' | chpasswd
 
-RUN /usr/bin/python3.6 -m pip install tensorflow 
+RUN /usr/bin/python3.5 -m pip install tensorflow 
 
 RUN mkdir -p /root/logiciel
 

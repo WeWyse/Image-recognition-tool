@@ -42,7 +42,7 @@
 //setTimeout(function(){
 	//var socket = io.connect('http://192.168.99.112:8081');
         var socket = io.connect('http://<%= ip %>:<%= port %>');
-
+	
 	socket.on('message', function (reception) {
 	var wrapper = document.getElementById('wrapper');
 	var loader = document.getElementById('loader');	
@@ -68,6 +68,7 @@
 			</ul>
 		</nav>	
 		<div class="row">
+
 			<div class="col-md-4">
 				<div class="jumbotron" id="learn">LEARN 
 				<p>
@@ -96,7 +97,34 @@
 				</div>
 			</div> --->
 			<div class="col-md-4">
-				<img class="visuel" src="/static/tempo/<%= page %><%= valeur %>">
+				<!--<img class="visuel" src="/static/tempo/<%= page %><%= valeur %>" style="width:75px">-->
+				<div id="thumbnail"></div>
+				<script>
+				function splitImages(imgs) {
+	                		var res = imgs.split(",");
+			                return res;
+				}
+	
+				function createHtmlImages(res) {
+	                		var siz = res.length;
+			        	var i;
+					var htmlValue='';
+					for (i = 0; i < siz; i++) {
+						htmlValue += "<img class=\"visuel\" src=\"/static/tempo/learn"+res[i]+"\" style=\"width:75px\">" ;
+						//alert(htmlValue);
+					}
+        			return htmlValue;
+	        		}
+				
+				function showThumbnail(p) {
+					document.getElementById("thumbnail").innerHTML += p;
+				}
+				
+				var listImages = splitImages('<%= valeur %>');
+				var htmlCode = createHtmlImages(listImages);
+				showThumbnail(htmlCode);
+
+				</script>
 			</div>
 			<div class="col-md-4">
 				<div class="jumbotron">
