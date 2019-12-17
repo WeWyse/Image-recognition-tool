@@ -2,7 +2,7 @@
 FROM tensorflow/tensorflow:latest-devel
 
 RUN apt-get update \ 
-&& apt-get -y install vim \ 
+&& apt-get -y install vim \
 && apt-get -y install curl \
 && apt-get -y install cron \
 && apt-get -y install grep \
@@ -13,7 +13,7 @@ RUN mkdir /var/run/sshd
 
 RUN echo 'root:password' | chpasswd
 
-RUN /usr/bin/python3.5 -m pip install tensorflow 
+RUN /usr/bin/python3.6 -m pip install tensorflow 
 
 RUN mkdir -p /root/logiciel
 

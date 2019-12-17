@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nodejs-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/Users/docker"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nodejs-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: nodejs-dep
+  template:
+    metadata:
+      labels:
+        app: nodejs-dep
+    spec:
+      volumes:
+      - name: nodejs-storage
+        persistentVolumeClaim:
+          claimName: nodejs-claim
+      containers:
+      - name: nodejs-pod
+        image: nodejs-k8:v3
+        imagePullPolicy: Never
+        stdin: true
+        tty: true
+        ports:
+        - containerPort: 8081
+        volumeMounts:
+        - mountPath: "/Users/docker"
+          name: nodejs-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-service
+spec:
+  selector:
+    app: nodejs-dep
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8081
+    targetPort: 8080
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nodejs-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /
+          backend:
+            serviceName: nodejs-service
+            servicePort: 8081
+        - path: /learn
+          backend:
+            serviceName: nodejs-service
+            servicePort: 8081
+        - path: /recognize
+          backend:
+            serviceName: nodejs-service
+            servicePort: 8081

@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tensor-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/Users/docker"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tensor-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tensor-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: tensor-dep
+  template:
+    metadata:
+      labels:
+        app: tensor-dep
+    spec:
+      volumes:
+      - name: tensor-storage
+        persistentVolumeClaim:
+          claimName: tensor-claim
+      containers:
+      - name: tensor-pod
+        image: tensorflow-k8:v1
+        imagePullPolicy: Never
+        stdin: true
+        tty: true
+        ports:
+        - containerPort: 2222
+        volumeMounts:
+        - mountPath: "/Users/docker"
+          name: tensor-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tensor-service
+spec:
+  selector:
+    app: tensor-dep
+  ports:
+  - name: ssh
+    protocol: TCP
+    port: 2222
+    targetPort: 22
+  type: NodePort
