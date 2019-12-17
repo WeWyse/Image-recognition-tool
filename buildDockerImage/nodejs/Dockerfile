@@ -59,6 +59,12 @@ EXPOSE 8080
 
 RUN mkdir /var/run/sshd
 
+RUN touch /Users/docker/log_learn.txt
+
+RUN touch /Users/docker/log_reco.txt
+
+RUN touch /Users/docker/log_watch.txt
+
 RUN echo 'root:password' | chpasswd
 
 EXPOSE 22
