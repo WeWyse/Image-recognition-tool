@@ -39,6 +39,8 @@ COPY index.js /usr/src/app
 
 COPY properties.file /usr/src/app 
 
+COPY setUp.sh /usr/src/app
+
 COPY index.ejs /usr/src/app/views
 
 COPY recognize.ejs /usr/src/app/views
@@ -49,7 +51,9 @@ COPY wait.gif /usr/src/app/img/tempo
 
 WORKDIR /usr/src/app/img/tempo
 
-ADD learn /Users/docker/www/ksia/images/learn
+RUN mkdir -p /usr/src/app/www/ksia/images/learn
+
+ADD learn /usr/src/app/www/ksia/images/learn
 
 RUN ln -s /Users/docker/www/ksia/images/learn learn
 
@@ -59,18 +63,8 @@ EXPOSE 8080
 
 RUN mkdir /var/run/sshd
 
-RUN touch /Users/docker/log_learn.txt
-
-RUN touch /Users/docker/log_reco.txt
-
-RUN touch /Users/docker/log_watch.txt
-
 RUN echo 'root:password' | chpasswd
 
 EXPOSE 22
 
-RUN useradd docker
-
 WORKDIR /usr/src/app
-
-RUN nohup node index &
