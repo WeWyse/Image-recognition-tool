@@ -93,7 +93,10 @@ mettre en place le ssh-less entre le container nodejs et le container tensorflow
 > et copier le contenu de /root/.ssh/id_rsa.pub<br>
 > dans /root/.ssh/authorized_keys du container tensorflow ( vous y accédez comme suit :docker exec -ti tensor-service sh )<br>
 
-### Vous pouvez lancer le service nodejs comme suit : 
+### Préparation environnement :
+> ./setUp.sh
+
+### Lancement du service nodejs : 
 > nohup node index &
 
 sortir du container nodejs puis : 
