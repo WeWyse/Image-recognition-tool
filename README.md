@@ -4,120 +4,20 @@
 
 # Principe du projet : 
 
-* un container "nodejs" : frontal web dédié à la gestion des images à labelliser ou à entrainer.
-* un container "tensorflow" : applicatif qui permettra de lancer les scripts python de labellisation et de reconnaissance.
-* à venir : container "nginx" pour gérer du loadbalacing au dessus de nodejs
+Mise en place d'un portail web qui permet de réaliser de la reconnaissance d'images.
 
-# Pré-requis :
+2 fonctionnalités sont proposées:
 
-docker (et docker-machine) installés sur votre environnement
-* https://docs.docker.com/
-* https://docs.docker.com/docker-for-mac/
-* https://docs.docker.com/docker-for-windows/
-* https://chrome.google.com/webstore/detail/fatkun-batch-download-ima/nnjjahlikiabnchcpehcpkdeckfgnohf?hl=en
-( je vous conseille chrome avec cette extension pour récupérer des images facilement et avec une bonne nomenclature )
+- apprentissage  : fournir un "bulk" d'images labellisées et lancer l'apprentissage.
+- reconnaissance : fournir une image et lancer la reconnaissance de cette dernière.
 
-Dans suite du tuto, je pars du principe que le git clone s'est fait dans le path /Users/docker
-(à vous d'adapter si vous optez pour un autre path).
 
-Notez aussi que c'est une béta et que le process n'est pas encore optimal.
+En back , on passe par le mécanisme du "Transfert Learning" ( Inception Classifier )
 
-# Les étapes : 
 
-### Clone du projet dans /Users/docker
-> git clone https://github.com/WeWyse/KSIA.git
+La solution s'articule autours de 2 containers Docker:
 
-### Build image nodejs
-> docker build /Users/docker/KSIA/buildDockerImage/nodejs --tag nodejs-v0
+- un container "nodejs" : frontal web dédié à la gestion des images à labelliser ou à entrainer.
+- un container "tensorflow" : applicatif qui permettra de lancer les scripts python de labellisation et de reconnaissance.
 
-### Build image tensorflow
-> docker build /Users/docker/KSIA/buildDockerImage/tensorflow --tag tensor-v0
-
-### List environnement docker
-> docker-machine ls
---> vous donnera entre autre l'ip à utiliser pour accéder au service
-
-### Création environnement irtt-docker
-> docker-machine create irtt-docker
-
-### Start environnement docker
-> docker-machine start irtt-docker
-
-### Set env
-> eval $(docker-machine env irtt-docker)
-
-### List docker images
-> docker image ls
-
-### List docker containers
-> docker ps -a
-
-### Regenerate certificates ( optional )
-> docker-machine regenerate-certs irtt-docker
-
-### Start container nodejs
-> docker run -di --name nodejs-service -v /Users/docker:/Users/docker -d -p 8081:8080 -p 8022:22 id-image-container-nodejs
-
-ex : docker run -di --name nodejs-service -v /Users/docker:/Users/docker -d -p 8081:8080 -p 8022:22 e068202eb067
-
-### Start container tensorflow
-> docker run -di --name tensor-service -v /Users/docker:/Users/docker -d -p 2222:22 id-image-container-tensorflow
-
-ex : docker run -di --name tensor-service -v /Users/docker:/Users/docker -d -p 2222:22 5091ada4e39a 
-
-## sh container nodejs
-> docker exec -ti nodejs-service sh
-
-à ce stade, vous êtes dans le container du service nodejs, dans le répertoire /usr/src/app
-
-il faut la première fois :
-
-mettre à jour le fichier /usr/src/app/properties.files
-
-> [main]
-> some.thing = foo<br>
-> ip = < mettre ici l'ip local du container nodejs ( celle accessible via browser web ) ><br>
-> port = 8081<br>
-> shared.volume = /Users/docker/<br>
-
-> [tensor]
-> ip = < mettre ici l'ip priv?e du container , souvent en 172.17.0.xx )<br>
-
-> commande pour recupérer l'ip : docker inspect id-du-container-tensorflow | grep -i IPAddress
-  
-ex: docker inspect b035760bdffc | grep -i IPAddress
-
-mettre en place le ssh-less entre le container nodejs et le container tensorflow
-
-> faire un ssh-keygen<br>
-> et copier le contenu de /root/.ssh/id_rsa.pub<br>
-> dans /root/.ssh/authorized_keys du container tensorflow ( vous y accédez comme suit :docker exec -ti tensor-service sh )<br>
-
-### Préparation environnement :
-> ./setUp.sh
-
-### Lancement du service nodejs : 
-> nohup node index &
-
-sortir du container nodejs puis : 
-
-### sh container tensorflow 
-> docker exec -ti tensor-service sh
-
-### Lancement du service ssh container dans le container tensorflow
-> /etc/init.d/ssh start
-
-Vous devez accéder à une interface web : http://ip-local:8081 et pouvez commencer à l'utiliser.
-
-pour info : le projet a été entrainé avec des images de :
-
-> Dark Vador<br>
-> Batman <br>
-> Spiderman <br>
-> Thor <br>
-> Albator <br>
-> Black panther <br> 
-> Cobra <br>
-> Hulk <br>
-> Captain America <br> 
-
+Cf wiki : 
