@@ -20,4 +20,4 @@ La solution s'articule autours de 2 containers Docker:
 - un container "nodejs" : frontal web dédié à la gestion des images à labelliser ou à entrainer.
 - un container "tensorflow" : applicatif qui permettra de lancer les scripts python de labellisation et de reconnaissance.
 
-Cf wiki : 
+Cf wiki : https://github.com/WeWyse/Image-recognition-tool/wiki
