@@ -45,7 +45,7 @@ spec:
           claimName: nodejs-claim
       containers:
       - name: nodejs-pod
-        image: nodejs-k8:v3
+        image: nodejs-k8:v1
         imagePullPolicy: Never
         stdin: true
         tty: true
