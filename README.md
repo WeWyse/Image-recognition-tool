@@ -12,7 +12,7 @@ Mise en place d'un portail web qui permet de réaliser de la reconnaissance d'im
 - reconnaissance : fournir une image et lancer la reconnaissance de cette dernière.
 
 
-En back , on passe par le mécanisme du "Transfert Learning" ( Inception Classifier )
+En back , on passe par un algo s'appuyant sur le principe du "Transfert Learning" ( Inception Classifier )
 
 
 La solution s'articule autours de 2 containers Docker:
